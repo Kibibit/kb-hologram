@@ -1,0 +1,60 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Comfortaa', cursive;
+}
+
+.kb-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 7em;
+}
+.kb-title img {
+  height: 70%;
+  margin: 0 2em 0 0;
+}
+
+.kb-powered {
+  display: none;
+}
+
+.hero-body {
+  padding: 1.5rem;
+}
+.hero-body .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kb-list {
+  padding: 3em;
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+}
+
+#container {
+  padding: 2em;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  /* it will calculate automatically, try space-between too */
+}
+
+#container ul {
+  max-width: 50%;
+  list-style: square inside;
+  margin: 0 1em;
+}
+#container ul li {
+  font-size: 1.4em;
+  padding-bottom: 0.2em;
+}
