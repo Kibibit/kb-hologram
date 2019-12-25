@@ -1,6 +1,6 @@
 {
   "name": "@kibibit/kb-hologram",
-  "version": "1.0.0",
+  "version": "1.0.0-next.2",
   "description": "create images from templates and data",
   "types": "lib/image-maker.d.ts",
   "main": "lib/image-maker.js",
@@ -49,6 +49,7 @@
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
     "@kibibit/test-report-now": "^1.0.0",
+    "@semantic-release/changelog": "^3.0.6",
     "@semantic-release/commit-analyzer": "^6.1.0",
     "@semantic-release/exec": "^3.4.0-beta.2",
     "@semantic-release/git": "^7.1.0-beta.3",
@@ -62,7 +63,7 @@
     "@types/jsdom": "^12.2.4",
     "@types/lodash": "^4.14.149",
     "@types/moment": "^2.13.0",
-    "@types/node": "^12.7.5",
+    "@types/node": "^13.1.0",
     "@types/puppeteer": "^2.0.0",
     "@types/semantic-release": "^15.13.1",
     "@types/svg2png": "^4.1.0",
@@ -72,13 +73,13 @@
     "cz-conventional-changelog": "^3.0.2",
     "depcheck": "^0.9.1",
     "husky": "^3.1.0",
+    "jest": "^24.9.0",
     "jest-github-reporter": "^0.3.4",
     "jest-image-snapshot": "^2.11.1",
     "jest-stare": "^1.25.0",
-    "jest": "^24.9.0",
     "now": "^16.7.0",
-    "semantic-release-cli": "^5.2.3",
     "semantic-release": "16.0.0-beta.46",
+    "semantic-release-cli": "^5.2.3",
     "supertest": "^4.0.2",
     "ts-jest": "^24.1.0",
     "ts-loader": "^6.1.1",
@@ -157,10 +158,17 @@
     ],
     "prepare": [
       "@semantic-release/npm",
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "docs/CHANGELOG.md"
+        }
+      ],
       {
         "path": "@semantic-release/git",
         "assets": [
-          "package.json"
+          "package.json",
+          "docs/CHANGELOG.md"
         ],
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
