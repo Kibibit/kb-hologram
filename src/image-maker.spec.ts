@@ -86,8 +86,7 @@ describe('image maker', () => {
     // writeFile('na.png', pngBuffer);
 
     (expect(pngBuffer) as any).toMatchImageSnapshot({
-      customDiffConfig: customConfig,
-      blur: 2
+      customDiffConfig: customConfig
     });
   });
 
@@ -129,7 +128,7 @@ describe('image maker', () => {
     // await writeFile('nice.svg', pngBuffer);
 
     (expect(pngBuffer) as any).toMatchImageSnapshot({
-      blur: 2
+      customDiffConfig: customConfig
     });
   });
 });
