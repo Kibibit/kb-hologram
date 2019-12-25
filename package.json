@@ -1,6 +1,6 @@
 {
   "name": "@kibibit/kb-hologram",
-  "version": "1.0.0-next.1",
+  "version": "1.0.0-next.2",
   "description": "create images from templates and data",
   "types": "lib/image-maker.d.ts",
   "main": "lib/image-maker.js",
