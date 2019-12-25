@@ -10,6 +10,8 @@ const FONT_PATH = '../Comfortaa-Regular.ttf';
 const HEIGHT = 534;
 const WIDTH = 1069;
 
+const customConfig = { threshold: 0.5 };
+
 describe('image maker', () => {
   it('should generate svg string with params', async () => {
     const svgMaker = new SvgMaker({
@@ -83,7 +85,9 @@ describe('image maker', () => {
 
     // writeFile('na.png', pngBuffer);
 
-    (expect(pngBuffer) as any).toMatchImageSnapshot();
+    (expect(pngBuffer) as any).toMatchImageSnapshot({
+      customDiffConfig: customConfig
+    });
   });
 
   it('should generate changelog from html template', async () => {
@@ -123,6 +127,8 @@ describe('image maker', () => {
 
     // await writeFile('nice.svg', pngBuffer);
 
-    (expect(pngBuffer) as any).toMatchImageSnapshot();
+    (expect(pngBuffer) as any).toMatchImageSnapshot({
+      customDiffConfig: customConfig
+    });
   });
 });
