@@ -25,7 +25,87 @@
 </p>
 <hr>
 
-<!-- GENERAL DESCRIPTION IF NEEDED -->
-GENERAL DESCRIPTION IF NEEDED
+## how to use
 
-<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+### Installation
+
+```bash
+$ npm install --save @kibibit/kb-hologram
+```
+
+### Usage
+
+```javascript
+import { SvgMaker, SvgMakerResultType } from '@kibibit/kb-hologram';
+
+const svgMaker = new SvgMaker({
+      fontName: '../Comfortaa-Regular.ttf',
+      templateName: 'changelog-template',
+      height: 534 * 2,
+      width: 1069 * 2,
+      data: {
+        columnOne: [
+          'Compact folders in Explorer',
+          'Edit both files in diff view',
+          'Search results update while typing',
+          'Problems panel filtering by type',
+          'Minimap highlights errors, changes',
+          'Terminal minimum contrast ratio'
+        ],
+        columnTwo: [
+          'Mirror cursor in HTML tags',
+          'Optional chaining support in JS\\TS',
+          'Extract to interface TS refactoring',
+          'Sass module support for @use',
+          'Remote - Containers improvements',
+          'Visual Studio Online preview'
+        ],
+        title: 'achievibit',
+        subtitle: 'v2.1.4 - CHANGELOG',
+        logo: {
+          url: 'data:image/png;base64,<icon-data>',
+          alt: 'kibibit'
+        }
+      },
+      type: 'html'
+    });
+
+    const pngBuffer = await svgMaker
+      .render(SvgMakerResultType.PngBuffer);
+```
+
+### Test
+
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+```
+
+## Stay in touch
+
+- Author - [Neil Kalman](https://github.com/thatkookooguy)
+
+## Contributors
+
+Want to file a bug, contribute some code, or improve documentation? Excellent! Read up on our guidelines for [contributing](CONTRIBUTING.MD).
+
+You can check out some easy to start with issues in the [Easy Pick](https://github.com/Kibibit/kb-hologram/labels/Easy%20Pick).
+
+## Contributor Code of Conduct
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+
+By participating in this project you agree to abide by its terms.
+
+## License
+
+[MIT License](LICENSE)
+
+Copyright (c) 2020 Neil Kalman &lt;neilkalman@gmail.com&gt;
+
+<div>Module Icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
