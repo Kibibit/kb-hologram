@@ -26,14 +26,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Kibibit/project-template.git"
+    "url": "https://github.com/Kibibit/kb-hologram.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Kibibit/project-template/issues"
+    "url": "https://github.com/Kibibit/kb-hologram/issues"
   },
-  "homepage": "https://github.com/Kibibit/project-template#readme",
+  "homepage": "https://github.com/Kibibit/kb-hologram#readme",
   "dependencies": {
     "class-transformer": "^0.2.3",
     "class-validator": "^0.11.0",
