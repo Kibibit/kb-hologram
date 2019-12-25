@@ -76,8 +76,8 @@ describe('image maker', () => {
       height: HEIGHT,
       width: WIDTH,
       data: {
-        unitCoverage: 666 * 2,
-        e2eCoverage: 333 * 2
+        unitCoverage: 666,
+        e2eCoverage: 333
       }
     });
 
