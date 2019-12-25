@@ -14,7 +14,7 @@
 
 </head>
 
-<body>
+<body class="kb-body">
   <!-- partial:index.partial.html -->
   <div class="kb-powered">
     <img src="https://rawgit.com/Kibibit/kibibit-assets/master/SVG/long-white.svg"
@@ -30,7 +30,7 @@
       Visual Studio Code
     </h2>
   </div>
-  <section class="hero is-warning kb-spacer is-bold">
+  <section class="kb-hero hero is-warning kb-spacer is-bold">
     <div class="hero-body">
       <div class="container">
         <h3 class="title is-3 has-text-centered"
@@ -60,7 +60,7 @@
 
       if (data.logo) {
         document.querySelector('#img-container').innerHTML =
-        `<img src="${data.logo.url}" style="height: 3em;">`;
+        `<img src="${data.logo.url}">`;
       }
     }
   </script>
