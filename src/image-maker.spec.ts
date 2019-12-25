@@ -10,6 +10,8 @@ const FONT_PATH = '../Comfortaa-Regular.ttf';
 const HEIGHT = 534;
 const WIDTH = 1069;
 
+const customConfig = { threshold: 0.5 };
+
 describe('image maker', () => {
   it('should generate svg string with params', async () => {
     const svgMaker = new SvgMaker({
@@ -74,8 +76,8 @@ describe('image maker', () => {
       height: HEIGHT,
       width: WIDTH,
       data: {
-        unitCoverage: 666,
-        e2eCoverage: 333
+        unitCoverage: 666 * 2,
+        e2eCoverage: 333 * 2
       }
     });
 
@@ -84,7 +86,8 @@ describe('image maker', () => {
     // writeFile('na.png', pngBuffer);
 
     (expect(pngBuffer) as any).toMatchImageSnapshot({
-      blur: 2
+      customDiffConfig: customConfig,
+      blur: 1
     });
   });
 
@@ -92,8 +95,8 @@ describe('image maker', () => {
     const svgMaker = new SvgMaker({
       fontName: '../Comfortaa-Regular.ttf',
       templateName: 'changelog-template',
-      height: 534,
-      width: 1069,
+      height: 534 * 2,
+      width: 1069 * 2,
       data: {
         columnOne: [
           'Compact folders in Explorer',
@@ -126,7 +129,7 @@ describe('image maker', () => {
     // await writeFile('nice.svg', pngBuffer);
 
     (expect(pngBuffer) as any).toMatchImageSnapshot({
-      blur: 2
+      blur: 1
     });
   });
 });
