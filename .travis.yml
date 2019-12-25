@@ -14,6 +14,7 @@ jobs:
       script:
         - npm run build
         - npm run test:cov
+        - npm run deploy-test-results
         - npm run coveralls
     - stage: release
       node_js: lts/*
