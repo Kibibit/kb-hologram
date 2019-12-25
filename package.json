@@ -1,9 +1,17 @@
 {
-  "name": "@kibibit/project-template",
-  "version": "1.0.0",
-  "description": "all basic node.js project tools installed and ready to go",
-  "main": "index.js",
+  "name": "@kibibit/kb-hologram",
+  "version": "0.0.0-development",
+  "description": "create images from templates and data",
+  "types": "lib/image-maker.d.ts",
+  "main": "lib/image-maker.js",
+  "files": [
+    "/lib",
+    "/bin",
+    "/templates",
+    "Comfortaa-Regular.ttf"
+  ],
   "scripts": {
+    "build": "tsc",
     "generate-barrels": "barrelsby --delete -d ./src -l below -q",
     "coveralls": "cat ./test-results/coverage/lcov.info | coveralls",
     "commit": "npx git-cz",
@@ -12,11 +20,13 @@
     "test:watch": "jest --watch --coverage",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "semantic-release": "semantic-release",
+    "deploy-test-results": "kb-reporter"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kibibit/project-template.git"
+    "url": "https://github.com/Kibibit/project-template.git"
   },
   "author": "",
   "license": "ISC",
@@ -27,27 +37,48 @@
   "dependencies": {
     "class-transformer": "^0.2.3",
     "class-validator": "^0.11.0",
+    "file-type": "^12.4.2",
     "fs-extra": "^8.1.0",
+    "jsdom": "^15.2.1",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "puppeteer": "^2.0.0",
+    "svg2png": "^4.1.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
+    "@kibibit/test-report-now": "^1.0.0",
+    "@semantic-release/commit-analyzer": "^6.1.0",
+    "@semantic-release/exec": "^3.4.0-beta.2",
+    "@semantic-release/git": "^7.1.0-beta.3",
+    "@semantic-release/github": "^5.2.10",
+    "@semantic-release/npm": "^5.1.4",
+    "@semantic-release/release-notes-generator": "^7.1.4",
+    "@types/file-type": "^10.9.1",
     "@types/fs-extra": "^8.0.1",
+    "@types/handlebars": "^4.1.0",
+    "@types/jest-image-snapshot": "^2.11.1",
+    "@types/jsdom": "^12.2.4",
     "@types/lodash": "^4.14.149",
     "@types/moment": "^2.13.0",
     "@types/node": "^12.7.5",
+    "@types/puppeteer": "^2.0.0",
+    "@types/semantic-release": "^15.13.1",
+    "@types/svg2png": "^4.1.0",
     "barrelsby": "^2.2.0",
     "commitizen": "^4.0.3",
     "coveralls": "^3.0.9",
     "cz-conventional-changelog": "^3.0.2",
     "depcheck": "^0.9.1",
     "husky": "^3.1.0",
-    "jest": "^24.9.0",
     "jest-github-reporter": "^0.3.4",
+    "jest-image-snapshot": "^2.11.1",
     "jest-stare": "^1.25.0",
+    "jest": "^24.9.0",
     "now": "^16.7.0",
+    "semantic-release-cli": "^5.2.3",
+    "semantic-release": "16.0.0-beta.46",
     "supertest": "^4.0.2",
     "ts-jest": "^24.1.0",
     "ts-loader": "^6.1.1",
@@ -106,5 +137,43 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "release": {
+    "branches": [
+      "master",
+      {
+        "name": "next",
+        "prerelease": true
+      }
+    ],
+    "npmPublish": true,
+    "analyzeCommits": [
+      "@semantic-release/commit-analyzer"
+    ],
+    "verifyConditions": [
+      "@semantic-release/npm",
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ],
+    "prepare": [
+      "@semantic-release/npm",
+      {
+        "path": "@semantic-release/git",
+        "assets": [
+          "package.json"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
+    "publish": [
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ],
+    "success": [
+      "@semantic-release/github"
+    ],
+    "fail": [
+      "@semantic-release/github"
+    ]
   }
 }

@@ -1,0 +1,97 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'Comfortaa', cursive;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.kb-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20%;
+}
+
+.kb-body .kb-hero {
+  height: 15%;
+}
+
+.kb-body .kb-hero .hero-body {
+  display: flex;
+  align-items: center;
+}
+
+.kb-title img {
+  height: 45%;
+  margin: 0 2em 0 0;
+}
+
+.kb-title .title {
+  font-size: 3.5vw;
+}
+
+#img-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kb-body #container ul li {
+  font-size: 2.11vw;
+}
+
+.kb-powered {
+  display: none;
+}
+
+.hero-body {
+  padding: 1.5rem;
+}
+
+.hero-body .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5vw;
+}
+
+.kb-list {
+  padding: 3em;
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+}
+
+#container {
+  padding: 2em;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  flex-grow: 1;
+  align-items: center;
+  /* it will calculate automatically, try space-between too */
+}
+
+#container ul {
+  max-width: 50%;
+  list-style: square inside;
+  margin: 0 1em;
+}
+
+#container ul li {
+  font-size: 1.4em;
+  padding-bottom: 0.2em;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <link rel='stylesheet'
+        href='https://fonts.googleapis.com/css?family=Fredoka+One|Righteous|Comfortaa'>
+  <link rel='stylesheet'
+        href='https://jenil.github.io/bulmaswatch/cyborg/bulmaswatch.min.css'>
+  <link rel="stylesheet"
+        href="./style-changelog-template.css">
+
+</head>
+
+<body class="kb-body">
+  <!-- partial:index.partial.html -->
+  <div class="kb-powered">
+    <img src="https://rawgit.com/Kibibit/kibibit-assets/master/SVG/long-white.svg"
+         alt="Bulma: a modern CSS framework based on Flexbox"
+         width="112"
+         height="28">
+  </div>
+
+  <div class="kb-title">
+    <span id="img-container"></span>
+    <h2 class="title is-2"
+        id="title">
+      Visual Studio Code
+    </h2>
+  </div>
+  <section class="kb-hero hero is-warning kb-spacer is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <h3 class="title is-3 has-text-centered"
+            id="text-highlight">
+          November Update [1.41] - Released
+        </h3>
+      </div>
+    </div>
+  </section>
+  <div id="container">
+    <ul id="target-list-column-1"></ul>
+    <ul id="target-list-column-2"></ul>
+  </div>
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <script>
+    const activate = (data) => {
+      document.querySelector('#target-list-column-1').innerHTML =
+        data.columnOne.map((element) => `<li>${element}</li>`).join('');
+
+      document.querySelector('#target-list-column-2').innerHTML =
+        data.columnTwo.map((element) => `<li>${element}</li>`).join('');
+
+      document.querySelector('#title').innerHTML = data.title;
+      document.querySelector('#text-highlight').innerHTML = data.subtitle;
+
+      if (data.logo) {
+        document.querySelector('#img-container').innerHTML =
+        `<img src="${data.logo.url}">`;
+      }
+    }
+  </script>
+</body>
+
+</html>
