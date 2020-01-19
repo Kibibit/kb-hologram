@@ -74,6 +74,9 @@ const svgMaker = new SvgMaker({
       .render(SvgMakerResultType.PngBuffer);
 ```
 
+Which will return a **png buffer** for the following image:
+![generated changelog](https://raw.githubusercontent.com/Kibibit/kb-hologram/next/src/__image_snapshots__/image-maker-spec-ts-image-maker-should-generate-changelog-from-html-template-1-snap.png)
+
 ### Test
 
 ```bash
