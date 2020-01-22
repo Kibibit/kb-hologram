@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/Kibibit/kb-hologram" target="blank"><img src="./hologram.svg" width="150" ></a>
+  <a href="https://github.com/Kibibit/kb-hologram" target="blank"><img src="http://kibibit.io/kibibit-assets/kb-hologram/logo.svg" width="150" ></a>
   <h2 align="center">
     @kibibit/kb-hologram
   </h2>
