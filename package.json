@@ -54,7 +54,7 @@
     "@semantic-release/exec": "^3.4.0-beta.2",
     "@semantic-release/git": "^7.1.0-beta.3",
     "@semantic-release/github": "^5.2.10",
-    "@semantic-release/npm": "^5.1.4",
+    "@semantic-release/npm": "^7.0.0",
     "@semantic-release/release-notes-generator": "^7.1.4",
     "@types/file-type": "^10.9.1",
     "@types/fs-extra": "^8.0.1",
