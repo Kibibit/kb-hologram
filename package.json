@@ -74,7 +74,7 @@
     "depcheck": "^0.9.1",
     "husky": "^3.1.0",
     "jest": "^24.9.0",
-    "jest-github-reporter": "^0.3.4",
+    "jest-github-reporter": "^0.4.0",
     "jest-image-snapshot": "^2.11.1",
     "jest-stare": "^1.25.0",
     "now": "^16.7.0",
