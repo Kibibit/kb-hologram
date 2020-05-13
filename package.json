@@ -59,7 +59,7 @@
     "@types/file-type": "^10.9.1",
     "@types/fs-extra": "^8.0.1",
     "@types/handlebars": "^4.1.0",
-    "@types/jest-image-snapshot": "^2.11.1",
+    "@types/jest-image-snapshot": "^3.1.0",
     "@types/jsdom": "^12.2.4",
     "@types/lodash": "^4.14.149",
     "@types/moment": "^2.13.0",
