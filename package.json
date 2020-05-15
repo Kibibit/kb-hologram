@@ -57,7 +57,7 @@
     "@semantic-release/npm": "^5.1.4",
     "@semantic-release/release-notes-generator": "^7.1.4",
     "@types/file-type": "^10.9.1",
-    "@types/fs-extra": "^8.0.1",
+    "@types/fs-extra": "^9.0.0",
     "@types/handlebars": "^4.1.0",
     "@types/jest-image-snapshot": "^2.11.1",
     "@types/jsdom": "^12.2.4",
