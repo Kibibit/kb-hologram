@@ -1,3 +1,10 @@
+# [1.0.0-next.4](https://github.com/Kibibit/kb-hologram/compare/v1.0.0-next.3...v1.0.0-next.4) (2023-10-20)
+
+
+### Bug Fixes
+
+* **template-file:** fix passing template file to generate image ([eb917a8](https://github.com/Kibibit/kb-hologram/commit/eb917a8ea938d93267f0781ebe41a96e1245e241))
+
 # [1.0.0-next.3](https://github.com/Kibibit/kb-hologram/compare/v1.0.0-next.2...v1.0.0-next.3) (2023-10-20)
 
 
