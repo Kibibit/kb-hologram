@@ -68,6 +68,8 @@ export class SvgMaker {
       const svgString = handlebarsTemplate(data);
 
       if (this.options.type === "html") {
+        this.templateFilePath =
+          this.templateFilePath || (this.options.templateFile as string);
         const browser = await puppeteer.launch({
           headless: "new",
         });
