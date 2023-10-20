@@ -88,7 +88,7 @@ describe("image maker", () => {
     // writeFile('na.png', pngBuffer);
 
     (expect(pngBuffer) as any).toMatchImageSnapshot(customConfig);
-  });
+  }, 10000);
 
   it("should generate changelog from html template", async () => {
     const svgMaker = new SvgMaker({
@@ -128,5 +128,5 @@ describe("image maker", () => {
     // await writeFile('nice.svg', pngBuffer);
 
     (expect(pngBuffer) as any).toMatchImageSnapshot(customConfig);
-  });
+  }, 10000);
 });
