@@ -5,7 +5,7 @@
   "editor.tabSize": 2,
   "editor.rulers": [80],
   "editor.fontFamily": "Hack, Menlo, Monaco, 'Courier New', monospace",
-  "editor.matchBrackets": true,
+  "editor.matchBrackets": "always",
   // Terminal
   "terminal.integrated.fontFamily": "Hack, Menlo, Monaco, 'Courier New', monospace",
   "terminal.integrated.fontSize": 12,
