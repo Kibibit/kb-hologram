@@ -1,3 +1,15 @@
+# [1.0.0-next.5](https://github.com/Kibibit/kb-hologram/compare/v1.0.0-next.4...v1.0.0-next.5) (2023-10-21)
+
+
+### Features
+
+* **app:** rename main class to KbHologram ([8a8f2b3](https://github.com/Kibibit/kb-hologram/commit/8a8f2b345f784af6796c266d02e2dbf3d246faef))
+
+
+### BREAKING CHANGES
+
+* **app:** main class name has been changed
+
 # [1.0.0-next.4](https://github.com/Kibibit/kb-hologram/compare/v1.0.0-next.3...v1.0.0-next.4) (2023-10-20)
 
 
