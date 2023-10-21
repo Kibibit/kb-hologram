@@ -5,6 +5,7 @@
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "target": "es2017",
     "sourceMap": true,
@@ -13,5 +14,9 @@
     "baseUrl": "./",
     "paths": {}
   },
-  "exclude": ["node_modules", "lib", "**/*.spec.ts"]
+  "exclude": [
+    "node_modules",
+    "lib",
+    "**/*.spec.ts"
+  ]
 }

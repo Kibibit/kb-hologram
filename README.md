@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/Kibibit/kb-hologram" target="blank"><img src="./hologram.svg" width="150" ></a>
+  <a href="https://github.com/Kibibit/kb-hologram" target="blank"><img src="http://kibibit.io/kibibit-assets/kb-hologram/logo.svg" width="150" ></a>
   <h2 align="center">
     @kibibit/kb-hologram
   </h2>
@@ -36,43 +36,45 @@ $ npm install --save @kibibit/kb-hologram
 ### Usage
 
 ```javascript
-import { SvgMaker, SvgMakerResultType } from '@kibibit/kb-hologram';
+import { KbHologram, KbHologramResultType } from "@kibibit/kb-hologram";
 
-const svgMaker = new SvgMaker({
-      fontName: '../Comfortaa-Regular.ttf',
-      templateName: 'changelog-template',
-      height: 534 * 2,
-      width: 1069 * 2,
-      data: {
-        columnOne: [
-          'Compact folders in Explorer',
-          'Edit both files in diff view',
-          'Search results update while typing',
-          'Problems panel filtering by type',
-          'Minimap highlights errors, changes',
-          'Terminal minimum contrast ratio'
-        ],
-        columnTwo: [
-          'Mirror cursor in HTML tags',
-          'Optional chaining support in JS\\TS',
-          'Extract to interface TS refactoring',
-          'Sass module support for @use',
-          'Remote - Containers improvements',
-          'Visual Studio Online preview'
-        ],
-        title: 'achievibit',
-        subtitle: 'v2.1.4 - CHANGELOG',
-        logo: {
-          url: 'data:image/png;base64,<icon-data>',
-          alt: 'kibibit'
-        }
-      },
-      type: 'html'
-    });
+const kbHologram = new KbHologram({
+  fontName: "../Comfortaa-Regular.ttf",
+  templateName: "changelog-template",
+  height: 534 * 2,
+  width: 1069 * 2,
+  data: {
+    columnOne: [
+      "Compact folders in Explorer",
+      "Edit both files in diff view",
+      "Search results update while typing",
+      "Problems panel filtering by type",
+      "Minimap highlights errors, changes",
+      "Terminal minimum contrast ratio",
+    ],
+    columnTwo: [
+      "Mirror cursor in HTML tags",
+      "Optional chaining support in JS\\TS",
+      "Extract to interface TS refactoring",
+      "Sass module support for @use",
+      "Remote - Containers improvements",
+      "Visual Studio Online preview",
+    ],
+    title: "achievibit",
+    subtitle: "v2.1.4 - CHANGELOG",
+    logo: {
+      url: "data:image/png;base64,<icon-data>",
+      alt: "kibibit",
+    },
+  },
+  type: "html",
+});
 
-    const pngBuffer = await svgMaker
-      .render(SvgMakerResultType.PngBuffer);
+const pngBuffer = await kbHologram.render(KbHologramResultType.PngBuffer);
 ```
+
+Which will return a **png buffer** for the following image:
+![generated changelog](https://raw.githubusercontent.com/Kibibit/kb-hologram/next/src/__image_snapshots__/image-maker-spec-ts-image-maker-should-generate-changelog-from-html-template-1-snap.png)
 
 ### Test
 
@@ -98,6 +100,7 @@ Want to file a bug, contribute some code, or improve documentation? Excellent! R
 You can check out some easy to start with issues in the [Easy Pick](https://github.com/Kibibit/kb-hologram/labels/Easy%20Pick).
 
 ## Contributor Code of Conduct
+
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
 
 By participating in this project you agree to abide by its terms.
