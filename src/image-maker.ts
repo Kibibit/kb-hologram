@@ -6,7 +6,7 @@ import { join } from "path";
 import puppeteer from "puppeteer";
 import svg2png from "svg2png";
 
-export enum SvgMakerResultType {
+export enum KbHologramResultType {
   Base64Png = "Base64Png",
   Base64Svg = "Base64Svg",
   SvgString = "SvgString",
@@ -15,15 +15,15 @@ export enum SvgMakerResultType {
 }
 
 export type StringReturnInputs =
-  | SvgMakerResultType.Base64Png
-  | SvgMakerResultType.Base64Svg
-  | SvgMakerResultType.SvgString;
+  | KbHologramResultType.Base64Png
+  | KbHologramResultType.Base64Svg
+  | KbHologramResultType.SvgString;
 
 export type BufferReturnInputs =
-  | SvgMakerResultType.SvgBuffer
-  | SvgMakerResultType.PngBuffer;
+  | KbHologramResultType.SvgBuffer
+  | KbHologramResultType.PngBuffer;
 
-export interface ISvgMakerBaseOptions {
+export interface IKbHologramBaseOptions {
   templateName?: string;
   templateFile?: string | Buffer;
   templateString?: string;
@@ -36,17 +36,14 @@ export interface ISvgMakerBaseOptions {
   type?: "svg" | "html";
 }
 
-export class SvgMaker {
+export class KbHologram {
   private templateFilePath = "";
-  // constructor(options: ISvgMakerNameOptions)
-  // constructor(options: ISvgMakerFileOptions)
-  // constructor(options: ISvgMakerStringOptions)
-  constructor(public options: ISvgMakerBaseOptions) {}
+  constructor(public options: IKbHologramBaseOptions) {}
 
   async render(resultType: StringReturnInputs): Promise<string>;
   async render(resultType: BufferReturnInputs): Promise<Buffer>;
   async render(
-    resultType: SvgMakerResultType = SvgMakerResultType.SvgString
+    resultType: KbHologramResultType = KbHologramResultType.SvgString
   ): Promise<string | Buffer> {
     try {
       const template = await this.getTemplateAsString();
@@ -94,24 +91,24 @@ export class SvgMaker {
 
         await browser.close();
 
-        if (resultType === SvgMakerResultType.Base64Png) {
+        if (resultType === KbHologramResultType.Base64Png) {
           return this.bufferToBase64String(imageBuffer);
         }
 
         return imageBuffer;
       }
 
-      if (resultType === SvgMakerResultType.SvgString) {
+      if (resultType === KbHologramResultType.SvgString) {
         return svgString;
       }
 
       const svgFile = Buffer.from(svgString, "utf8");
 
-      if (resultType === SvgMakerResultType.SvgBuffer) {
+      if (resultType === KbHologramResultType.SvgBuffer) {
         return svgFile;
       }
 
-      if (resultType === SvgMakerResultType.Base64Svg) {
+      if (resultType === KbHologramResultType.Base64Svg) {
         return this.bufferToBase64String(svgFile, {
           mime: "image/svg+xml",
           ext: "svg",
@@ -123,7 +120,7 @@ export class SvgMaker {
         width: this.options.width,
       });
 
-      if (resultType === SvgMakerResultType.PngBuffer) {
+      if (resultType === KbHologramResultType.PngBuffer) {
         return pngFile;
       }
 

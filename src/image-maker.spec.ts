@@ -1,6 +1,6 @@
 import { toMatchImageSnapshot } from "jest-image-snapshot";
 
-import { SvgMaker, SvgMakerResultType } from "./image-maker";
+import { KbHologram, KbHologramResultType } from "./image-maker";
 import { join } from "path";
 
 // const toMatchImageSnapshot = configureToMatchImageSnapshot();
@@ -19,7 +19,7 @@ const customConfig = {
 
 describe("image maker", () => {
   it("should generate svg string with params", async () => {
-    const svgMaker = new SvgMaker({
+    const kbHologram = new KbHologram({
       fontName: FONT_PATH,
       templateName: "template-test-reporter",
       height: HEIGHT,
@@ -30,7 +30,7 @@ describe("image maker", () => {
       },
     });
 
-    const svgString = await svgMaker.render(SvgMakerResultType.SvgString);
+    const svgString = await kbHologram.render(KbHologramResultType.SvgString);
 
     expect(svgString).toContain("666");
     expect(svgString).toContain("333");
@@ -38,7 +38,7 @@ describe("image maker", () => {
   });
 
   it("should generate svg buffer", async () => {
-    const svgMaker = new SvgMaker({
+    const kbHologram = new KbHologram({
       fontName: FONT_PATH,
       templateName: "template-test-reporter",
       height: HEIGHT,
@@ -49,14 +49,14 @@ describe("image maker", () => {
       },
     });
 
-    const svgBuffer = await svgMaker.render(SvgMakerResultType.SvgBuffer);
+    const svgBuffer = await kbHologram.render(KbHologramResultType.SvgBuffer);
 
     expect(svgBuffer).toBeInstanceOf(Buffer);
     expect(svgBuffer.toString("base64")).toMatchSnapshot();
   });
 
   it("should generate svg Base64 string", async () => {
-    const svgMaker = new SvgMaker({
+    const kbHologram = new KbHologram({
       fontName: FONT_PATH,
       templateName: "template-test-reporter",
       height: HEIGHT,
@@ -67,13 +67,15 @@ describe("image maker", () => {
       },
     });
 
-    const svgB64String = await svgMaker.render(SvgMakerResultType.Base64Svg);
+    const svgB64String = await kbHologram.render(
+      KbHologramResultType.Base64Svg
+    );
 
     expect(svgB64String).toMatchSnapshot();
   });
 
   it("should generate a coverage image from template", async () => {
-    const svgMaker = new SvgMaker({
+    const kbHologram = new KbHologram({
       fontName: FONT_PATH,
       templateName: "template-test-reporter",
       height: HEIGHT,
@@ -84,7 +86,7 @@ describe("image maker", () => {
       },
     });
 
-    const pngBuffer = await svgMaker.render(SvgMakerResultType.PngBuffer);
+    const pngBuffer = await kbHologram.render(KbHologramResultType.PngBuffer);
 
     // writeFile('na.png', pngBuffer);
 
@@ -92,7 +94,7 @@ describe("image maker", () => {
   }, 10000);
 
   it("should generate changelog from html template", async () => {
-    const svgMaker = new SvgMaker({
+    const kbHologram = new KbHologram({
       fontName: "../Comfortaa-Regular.ttf",
       templateName: "changelog-template",
       height: 534 * 2,
@@ -124,7 +126,7 @@ describe("image maker", () => {
       type: "html",
     });
 
-    const pngBuffer = await svgMaker.render(SvgMakerResultType.PngBuffer);
+    const pngBuffer = await kbHologram.render(KbHologramResultType.PngBuffer);
 
     // await writeFile('nice.svg', pngBuffer);
 
@@ -132,7 +134,7 @@ describe("image maker", () => {
   }, 10000);
 
   it("should generate image from html template with external template", async () => {
-    const svgMaker = new SvgMaker({
+    const kbHologram = new KbHologram({
       fontName: "../Comfortaa-Regular.ttf",
       templateFile: join(
         __dirname,
@@ -154,7 +156,7 @@ describe("image maker", () => {
       type: "html",
     });
 
-    const pngBuffer = await svgMaker.render(SvgMakerResultType.PngBuffer);
+    const pngBuffer = await kbHologram.render(KbHologramResultType.PngBuffer);
 
     // await writeFile('nice.svg', pngBuffer);
 
