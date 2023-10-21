@@ -72,19 +72,25 @@ export class SvgMaker {
           this.templateFilePath || (this.options.templateFile as string);
         const browser = await puppeteer.launch({
           headless: "new",
+          timeout: 0,
         });
         const page = await browser.newPage();
         await page.setViewport({
           height: this.options.height,
           width: this.options.width,
         });
-        await page.goto("file://" + this.templateFilePath);
+        await page.goto("file://" + this.templateFilePath, {
+          waitUntil: "networkidle0",
+          timeout: 0,
+        });
         await page.addScriptTag({
           content: `
           activate(${JSON.stringify(this.options.data)})
           `,
         });
-        const imageBuffer = await page.screenshot({});
+        const imageBuffer = await page.screenshot({
+          omitBackground: true,
+        });
 
         await browser.close();
 
