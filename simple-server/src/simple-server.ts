@@ -2,6 +2,9 @@ import { IKbHologramBaseOptions, KbHologram, KbHologramResultType } from "@kibib
 import express, { Request, Response } from 'express';
 import bodyParser from "body-parser";
 import { join } from "path";
+import { createCache } from "cache-manager";
+import { CacheableMemory } from "cacheable";
+import { Keyv } from 'keyv';
 
 const app = express();
 const port = 3000;
@@ -12,22 +15,58 @@ app.use(bodyParser.urlencoded());
 // parse application/json
 app.use(bodyParser.json());
 
+// Create a memory cache with a TTL of 1 week
+const memoryCache = createCache({
+  stores: [
+    new Keyv({
+      store: new CacheableMemory({ ttl: 7 * 24 * 60 * 60, lruSize: 5000 }),
+    })
+  ],
+  ttl: 7 * 24 * 60 * 60 // TTL in seconds (1 week)
+});
+
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
 });
 
 app.post('/', async (req: Request, res: Response) => {
-  const kbHologramOptions = getKbHologramOptions(req.body);
-  const kbHologram = new KbHologram(kbHologramOptions);
+  const cacheKey = JSON.stringify(req.body);
 
-  const pngBuffer = await kbHologram.render(KbHologramResultType.PngBuffer);
+  try {
+    // Check if the image is cached
+    const cachedImage: Buffer | null = await memoryCache.get(cacheKey);
 
-  res.writeHead(200, {
-    'Content-Type': 'image/png',
-    'Content-Length': pngBuffer.length
-  });
+    if (cachedImage) {
+      console.log('Cache hit');
+      res.writeHead(200, {
+        'Content-Type': 'image/png',
+        'Content-Length': cachedImage.length
+      });
 
-  res.end(pngBuffer);
+      res.end(cachedImage);
+
+      return;
+    }
+
+    console.log('Cache miss');
+    // Generate a new image if not cached
+    const kbHologramOptions = getKbHologramOptions(req.body);
+    const kbHologram = new KbHologram(kbHologramOptions);
+    const pngBuffer = await kbHologram.render(KbHologramResultType.PngBuffer);
+
+    // Cache the generated image
+    await memoryCache.set(cacheKey, pngBuffer);
+
+    res.writeHead(200, {
+      'Content-Type': 'image/png',
+      'Content-Length': pngBuffer.length
+    });
+    res.end(pngBuffer);
+
+  } catch (error) {
+    console.error('Error generating image:', error);
+    res.status(500).send('Error generating image');
+  }
 });
 
 app.listen(port, () => {
