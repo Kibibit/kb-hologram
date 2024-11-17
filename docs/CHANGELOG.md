@@ -1,3 +1,17 @@
+# [2.1.0-next.1](https://github.com/Kibibit/kb-hologram/compare/v2.0.0...v2.1.0-next.1) (2024-11-17)
+
+
+### Bug Fixes
+
+* **ts:** exclude server from kb-hologram build ([93f0f7e](https://github.com/Kibibit/kb-hologram/commit/93f0f7eea85394a7ebc71b466905247b1319d3ea))
+
+
+### Features
+
+* **deps:** update dependencies and devDependencies to latest versions ([5fe1cf7](https://github.com/Kibibit/kb-hologram/commit/5fe1cf7ea399018795106065bd66a836ef213476))
+* **render:** fix code and tests after deps upgrade ([5df26ad](https://github.com/Kibibit/kb-hologram/commit/5df26ad8a75c4885e34d32251ec4c76b253327ab))
+* **server:** add simple server for deploying ([6919708](https://github.com/Kibibit/kb-hologram/commit/691970838dda3ee50db8986a34f8acb94c7d50e9))
+
 # [2.0.0](https://github.com/Kibibit/kb-hologram/compare/v1.1.0...v2.0.0) (2023-10-21)
 
 
