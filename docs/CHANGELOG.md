@@ -1,3 +1,10 @@
+# [2.1.0-next.3](https://github.com/Kibibit/kb-hologram/compare/v2.1.0-next.2...v2.1.0-next.3) (2024-11-17)
+
+
+### Features
+
+* **render:** optional executable path configuration ([8da4f07](https://github.com/Kibibit/kb-hologram/commit/8da4f071b408cc740e28f96ca24084b3c55fd187))
+
 # [2.1.0-next.2](https://github.com/Kibibit/kb-hologram/compare/v2.1.0-next.1...v2.1.0-next.2) (2024-11-17)
 
 
