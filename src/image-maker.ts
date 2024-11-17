@@ -1,5 +1,5 @@
 import fileType from "file-type";
-import { readdir, readFile, readFileSync } from "fs-extra";
+import fs from "fs-extra";
 import { compile } from "handlebars";
 import { isString, startsWith } from "lodash";
 import { join } from "path";
@@ -38,7 +38,7 @@ export interface IKbHologramBaseOptions {
 
 export class KbHologram {
   private templateFilePath = "";
-  constructor(public options: IKbHologramBaseOptions) {}
+  constructor(public options: IKbHologramBaseOptions) { }
 
   async render(resultType: StringReturnInputs): Promise<string>;
   async render(resultType: BufferReturnInputs): Promise<Buffer>;
@@ -51,8 +51,8 @@ export class KbHologram {
       const handlebarsTemplate = compile(template);
       const fontBase64 = this.options.fontName
         ? await this.convertFontToBase64String(
-            join(__dirname, this.options.fontName)
-          )
+          join(__dirname, this.options.fontName)
+        )
         : undefined;
 
       const data = {
@@ -68,7 +68,7 @@ export class KbHologram {
         this.templateFilePath =
           this.templateFilePath || (this.options.templateFile as string);
         const browser = await puppeteer.launch({
-          headless: "new",
+          headless: true,
           timeout: 0,
         });
         const page = await browser.newPage();
@@ -82,20 +82,23 @@ export class KbHologram {
         });
         await page.addScriptTag({
           content: `
-          activate(${JSON.stringify(this.options.data)})
+            activate(${JSON.stringify(this.options.data)})
           `,
         });
         const imageBuffer = await page.screenshot({
           omitBackground: true,
+          encoding: "binary",
         });
 
         await browser.close();
 
+        const bufferImage = Buffer.from(imageBuffer);
+
         if (resultType === KbHologramResultType.Base64Png) {
-          return this.bufferToBase64String(imageBuffer);
+          return await this.bufferToBase64String(bufferImage);
         }
 
-        return imageBuffer;
+        return bufferImage;
       }
 
       if (resultType === KbHologramResultType.SvgString) {
@@ -109,7 +112,7 @@ export class KbHologram {
       }
 
       if (resultType === KbHologramResultType.Base64Svg) {
-        return this.bufferToBase64String(svgFile, {
+        return await this.bufferToBase64String(svgFile, {
           mime: "image/svg+xml",
           ext: "svg",
         });
@@ -124,35 +127,36 @@ export class KbHologram {
         return pngFile;
       }
 
-      return this.bufferToBase64String(pngFile);
+      return await this.bufferToBase64String(pngFile);
     } catch (err) {
       console.error(err);
-
       throw err;
     }
   }
 
   async convertFontToBase64String(fontFile: string): Promise<string> {
-    const data = await readFile(fontFile);
+    const data = await fs.readFile(fontFile);
     const buff = Buffer.from(data);
-    const filetype = this.fileType(buff);
+    const filetype = await this.fileType(buff);
 
     const base64data = buff.toString("base64");
-
-    // writeFileSync('font-base64.txt', `data:${ filetype.mime };base64,${ base64data }`);
 
     return `data:${filetype.mime};base64,${base64data}`;
   }
 
-  bufferToBase64String(
+  async bufferToBase64String(
     buff: Buffer,
-    filetype: any = this.fileType(buff)
-  ): string {
+    filetype?: { mime: string; ext: string }
+  ): Promise<string> {
+    if (!filetype) {
+      const detectedFileType = await this.fileType(buff);
+      filetype = { mime: detectedFileType.mime, ext: detectedFileType.ext };
+    }
     return `data:${filetype.mime};base64,${buff.toString("base64")}`;
   }
 
-  fileType(buff: Buffer) {
-    const filetype = fileType(buff);
+  async fileType(buff: Buffer): Promise<fileType.FileTypeResult> {
+    const filetype = await fileType.fromBuffer(buff);
 
     if (!filetype) {
       throw new Error("filetype returned undefined");
@@ -165,7 +169,7 @@ export class KbHologram {
     let template = "";
 
     if (isString(this.options.templateName)) {
-      const allTemplates = await readdir(join(__dirname, "../templates"));
+      const allTemplates = await fs.readdir(join(__dirname, "../templates"));
 
       const templateFilename = allTemplates.find((templateFilename) =>
         startsWith(templateFilename, this.options.templateName)
@@ -178,10 +182,12 @@ export class KbHologram {
       this.templateFilePath = join(__dirname, "../templates", templateFilename);
 
       const filePath = join(__dirname, "../templates", `/${templateFilename}`);
-      template = await readFile(filePath, { encoding: "UTF-8" });
+      template = await fs.readFile(filePath, { encoding: "utf8" });
     } else if (this.options.templateFile) {
       template = isString(this.options.templateFile)
-        ? await readFile(this.options.templateFile, { encoding: "UTF-8" })
+        ? await fs.readFile(this.options.templateFile as string, {
+          encoding: "utf8",
+        })
         : this.options.templateFile.toString();
     } else if (this.options.templateString) {
       template = this.options.templateString;
