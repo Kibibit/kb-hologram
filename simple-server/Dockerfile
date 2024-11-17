@@ -33,6 +33,9 @@ COPY . .
 # Install application dependencies
 RUN npm install
 
+# Build the application
+RUN npm run build
+
 # Expose the API port
 EXPOSE 3000
 
