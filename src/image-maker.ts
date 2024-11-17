@@ -4,7 +4,6 @@ import { compile } from "handlebars";
 import { isString, startsWith } from "lodash";
 import { join } from "path";
 import puppeteer from "puppeteer";
-import svg2png from "svg2png";
 
 export enum KbHologramResultType {
   Base64Png = "Base64Png",
@@ -82,8 +81,8 @@ export class KbHologram {
         });
         await page.addScriptTag({
           content: `
-            activate(${JSON.stringify(this.options.data)})
-          `,
+                activate(${JSON.stringify(this.options.data)})
+              `,
         });
         const imageBuffer = await page.screenshot({
           omitBackground: true,
@@ -99,35 +98,50 @@ export class KbHologram {
         }
 
         return bufferImage;
-      }
+      } else {
+        if (resultType === KbHologramResultType.SvgString) {
+          return svgString;
+        }
 
-      if (resultType === KbHologramResultType.SvgString) {
-        return svgString;
-      }
+        const svgBuffer = Buffer.from(svgString, "utf8");
 
-      const svgFile = Buffer.from(svgString, "utf8");
+        if (resultType === KbHologramResultType.SvgBuffer) {
+          return svgBuffer;
+        }
 
-      if (resultType === KbHologramResultType.SvgBuffer) {
-        return svgFile;
-      }
+        if (resultType === KbHologramResultType.Base64Svg) {
+          return await this.bufferToBase64String(svgBuffer, {
+            mime: "image/svg+xml",
+            ext: "svg",
+          });
+        }
 
-      if (resultType === KbHologramResultType.Base64Svg) {
-        return await this.bufferToBase64String(svgFile, {
-          mime: "image/svg+xml",
-          ext: "svg",
+        // Use Puppeteer to render the SVG and take a screenshot
+        const browser = await puppeteer.launch({
+          headless: true,
+          timeout: 0,
         });
+        const page = await browser.newPage();
+        await page.setViewport({
+          width: this.options.width,
+          height: this.options.height,
+        });
+        await page.setContent(svgString);
+        const imageBuffer = await page.screenshot({
+          omitBackground: true,
+          encoding: "binary",
+        });
+        await browser.close();
+
+        const pngBuffer = Buffer.from(imageBuffer);
+
+        if (resultType === KbHologramResultType.PngBuffer) {
+          return pngBuffer;
+        }
+
+        // Default to Base64Png if resultType is not specified
+        return await this.bufferToBase64String(pngBuffer);
       }
-
-      const pngFile = await svg2png(svgFile, {
-        height: this.options.height,
-        width: this.options.width,
-      });
-
-      if (resultType === KbHologramResultType.PngBuffer) {
-        return pngFile;
-      }
-
-      return await this.bufferToBase64String(pngFile);
     } catch (err) {
       console.error(err);
       throw err;
