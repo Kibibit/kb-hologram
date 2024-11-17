@@ -1,3 +1,11 @@
+# [2.1.0-next.4](https://github.com/Kibibit/kb-hologram/compare/v2.1.0-next.3...v2.1.0-next.4) (2024-11-17)
+
+
+### Features
+
+* **render:** add no-sandbox if path is given ([b8b3aa9](https://github.com/Kibibit/kb-hologram/commit/b8b3aa92918013c7bdd6ad6d3d438c9e0d8df595))
+* **server:** update dockerfile ([fdc978d](https://github.com/Kibibit/kb-hologram/commit/fdc978da305c9224010dca70e22f3a6d47fd2231))
+
 # [2.1.0-next.3](https://github.com/Kibibit/kb-hologram/compare/v2.1.0-next.2...v2.1.0-next.3) (2024-11-17)
 
 
