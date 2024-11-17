@@ -42,8 +42,8 @@ function getKbHologramOptions(
   // properties
   const baseOptions: Omit<IKbHologramBaseOptions, 'templateName' | 'templateFile'> = {
     fontName: "../Comfortaa-Regular.ttf",
-    height: height || 534 / 2,
-    width: width || 1069 / 2,
+    height: height || Math.floor(534),
+    width: width || Math.floor(1069),
     data: data || {
       apiStatus: 'FAILED',
       e2eStatus: 'PASSED'
