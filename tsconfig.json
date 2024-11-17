@@ -17,6 +17,7 @@
   "exclude": [
     "node_modules",
     "lib",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "simple-server"
   ]
 }
