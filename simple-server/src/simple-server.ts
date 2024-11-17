@@ -49,6 +49,7 @@ function getKbHologramOptions(
       e2eStatus: 'PASSED'
     },
     type: "svg",
+    executablePath: '/usr/bin/chromium'
   };
 
   if (templateName) {

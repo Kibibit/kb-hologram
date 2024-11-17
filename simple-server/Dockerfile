@@ -4,8 +4,9 @@ FROM node:20
 # Set the working directory inside the container
 WORKDIR /usr/src/app
 
-# Install Chromium dependencies
+# Install Chromium dependencies and Chromium
 RUN apt-get update && apt-get install -y \
+  chromium \
   ca-certificates \
   fonts-liberation \
   libappindicator3-1 \
@@ -19,19 +20,22 @@ RUN apt-get update && apt-get install -y \
   libnss3 \
   libxcomposite1 \
   libxrandr2 \
+  libxshmfence1 \
   xdg-utils \
   --no-install-recommends && \
   apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install Puppeteer and its dependencies
-RUN npm install puppeteer
+# Set environment variable to skip Chromium download
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 # Copy the application files to the container
 COPY package*.json ./
-COPY . .
 
 # Install application dependencies
 RUN npm install
+
+# Copy the rest of the application files
+COPY . .
 
 # Build the application
 RUN npm run build
