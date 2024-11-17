@@ -33,6 +33,7 @@ export interface IKbHologramBaseOptions {
     [key: string]: any;
   };
   type?: "svg" | "html";
+  executablePath?: string;
 }
 
 export class KbHologram {
@@ -69,6 +70,7 @@ export class KbHologram {
         const browser = await puppeteer.launch({
           headless: true,
           timeout: 0,
+          executablePath: this.options.executablePath
         });
         const page = await browser.newPage();
         await page.setViewport({
@@ -120,6 +122,7 @@ export class KbHologram {
         const browser = await puppeteer.launch({
           headless: true,
           timeout: 0,
+          executablePath: this.options.executablePath
         });
         const page = await browser.newPage();
         await page.setViewport({
