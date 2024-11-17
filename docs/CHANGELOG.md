@@ -1,3 +1,11 @@
+# [2.1.0-next.2](https://github.com/Kibibit/kb-hologram/compare/v2.1.0-next.1...v2.1.0-next.2) (2024-11-17)
+
+
+### Features
+
+* **render:** remove dep svg2png ([d8c3354](https://github.com/Kibibit/kb-hologram/commit/d8c33548851fa31fe604d4c39a3a0f07edf83ca4))
+* **server:** build app before running ([407f0dc](https://github.com/Kibibit/kb-hologram/commit/407f0dc41ee957e3dbafec92718cafb200fd38c1))
+
 # [2.1.0-next.1](https://github.com/Kibibit/kb-hologram/compare/v2.0.0...v2.1.0-next.1) (2024-11-17)
 
 
