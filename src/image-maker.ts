@@ -70,7 +70,10 @@ export class KbHologram {
         const browser = await puppeteer.launch({
           headless: true,
           timeout: 0,
-          executablePath: this.options.executablePath
+          executablePath: this.options.executablePath,
+          args: this.options.executablePath ?
+            ['--no-sandbox', '--disable-setuid-sandbox'] :
+            []
         });
         const page = await browser.newPage();
         await page.setViewport({
@@ -122,7 +125,10 @@ export class KbHologram {
         const browser = await puppeteer.launch({
           headless: true,
           timeout: 0,
-          executablePath: this.options.executablePath
+          executablePath: this.options.executablePath,
+          args: this.options.executablePath ?
+            ['--no-sandbox', '--disable-setuid-sandbox'] :
+            []
         });
         const page = await browser.newPage();
         await page.setViewport({
