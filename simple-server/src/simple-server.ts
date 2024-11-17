@@ -1,9 +1,16 @@
 import { IKbHologramBaseOptions, KbHologram, KbHologramResultType } from "@kibibit/kb-hologram";
 import express, { Request, Response } from 'express';
+import bodyParser from "body-parser";
 import { join } from "path";
 
 const app = express();
 const port = 3000;
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded());
+
+// parse application/json
+app.use(bodyParser.json());
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
@@ -49,7 +56,7 @@ function getKbHologramOptions(
       e2eStatus: 'PASSED'
     },
     type: "svg",
-    executablePath: '/usr/bin/chromium'
+    // executablePath: '/usr/bin/chromium'
   };
 
   if (templateName) {
