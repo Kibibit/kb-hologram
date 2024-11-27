@@ -14,6 +14,8 @@ app.use(bodyParser.urlencoded());
 
 // parse application/json
 app.use(bodyParser.json());
+// parse query params
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Create a memory cache with a TTL of 1 week
 const memoryCache = createCache({
@@ -25,8 +27,56 @@ const memoryCache = createCache({
   ttl: 7 * 24 * 60 * 60 // TTL in seconds (1 week)
 });
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
+app.get('/', async (req: Request, res: Response) => {
+  // if got query param with data- prefix, put it inside data object
+  if (req.query) {
+    const dataKeys = Object.keys(req.query).filter(key => key.startsWith('data-'));
+    if (dataKeys.length > 0) {
+      req.query.data = dataKeys.reduce((acc, key) => {
+        const dataKey = key.replace('data-', '');
+        acc[dataKey] = req.query[key];
+        return acc;
+      }, {} as Record<string, any>);
+    }
+  }
+
+  const cacheKey = JSON.stringify(req.query);
+
+  try {
+    // Check if the image is cached
+    const cachedImage: Buffer | null = await memoryCache.get(cacheKey);
+
+    if (cachedImage) {
+      console.log('Cache hit');
+      res.writeHead(200, {
+        'Content-Type': 'image/png',
+        'Content-Length': cachedImage.length
+      });
+
+      res.end(cachedImage);
+
+      return;
+    }
+
+    console.log('Cache miss');
+    // Generate a new image if not cached
+    const kbHologramOptions = getKbHologramOptions(req.query);
+    const kbHologram = new KbHologram(kbHologramOptions);
+    const pngBuffer = await kbHologram.render(KbHologramResultType.PngBuffer);
+
+    // Cache the generated image
+    await memoryCache.set(cacheKey, pngBuffer);
+
+    res.writeHead(200, {
+      'Content-Type': 'image/png',
+      'Content-Length': pngBuffer.length
+    });
+    res.end(pngBuffer);
+
+  } catch (error) {
+    console.error('Error generating image:', error);
+    res.status(500).send('Error generating image');
+  }
 });
 
 app.post('/', async (req: Request, res: Response) => {
