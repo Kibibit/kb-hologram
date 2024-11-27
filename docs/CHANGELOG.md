@@ -1,3 +1,11 @@
+# [2.1.0-next.5](https://github.com/Kibibit/kb-hologram/compare/v2.1.0-next.4...v2.1.0-next.5) (2024-11-27)
+
+
+### Features
+
+* **server:** add beer css template ([a25ce31](https://github.com/Kibibit/kb-hologram/commit/a25ce3196249d8aea84b01fb4d1b00f116122ecd))
+* **server:** add get for generate images ([89ad7e1](https://github.com/Kibibit/kb-hologram/commit/89ad7e1c9d105e5e8e6ad6cb7f915d6ba1cd3d27))
+
 # [2.1.0-next.4](https://github.com/Kibibit/kb-hologram/compare/v2.1.0-next.3...v2.1.0-next.4) (2024-11-17)
 
 
