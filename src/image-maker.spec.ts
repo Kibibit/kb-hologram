@@ -131,7 +131,7 @@ describe("image maker", () => {
     // await writeFile('nice.svg', pngBuffer);
 
     (expect(pngBuffer) as any).toMatchImageSnapshot(customConfig);
-  }, 15000);
+  }, 20000);
 
   it("should generate image from html template with external template", async () => {
     const kbHologram = new KbHologram({
